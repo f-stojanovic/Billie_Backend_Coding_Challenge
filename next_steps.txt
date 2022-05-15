@@ -1,0 +1,43 @@
+Hi to all, :)
+
+Before sharing ideas that came to my mind about next steps in developing this
+application, I wanted to write briefly about what I have included so far. :)
+
+I have added basic Symfony registration and login form, just to warm it up a bit.
+After the login you are redirected to Billie dashboard.
+
+I have implemented AdminLte2 free theme, just so it can look lit. :D
+
+I have added some basic feature there like, number to companies and invoices
+we currently have inside the application and last 10 invoices that had been added.
+
+On the left sidebar we have a menu which has links to give us access to the list
+of companies and invoices, both of which have their separate views.
+
+I have implemented complete CRUD operations for them, pagination and some other
+features you will se once you enter the pages.
+
+On the edit page we can set debt limit for every debtor company on the list.
+
+In the invoice view we have operations where we can add/edit invoices we want to set.
+After invoice has been created, it is set to 'open' status and 'Download PDF' button
+is generated in the main table view.
+When clicking on it, you will be redirected to the download and view page of the
+PDF document. Invoices can be edited and set to status 'closed.'
+Closed invoices do not go in the group when calculating company's debt limit as
+they are defined as 'paid'. While adding them, if invoice we are adding is
+exceeding the debt limit of the company, the persisting will be aborted.
+
+This is brief explanation of the system I designed. You can surly try it
+yourself and get familiar with all it's functionalities.
+
+If I had more time, my next ideas will be to improve security (implement CSRF
+protection), managing roles for users, etc.
+I would also add cron jobs for some features within the application.
+I would implement usage of RabbitMQ as a message broker through Symfony messenger
+component.
+I would also think about TDD approach, but setting  and configuring framework env
+and writing documentation took time, so I was in a hurry of wrapping it all up.
+
+Regards,
+Filip

@@ -19,10 +19,10 @@ git clone https://github.com/f-stojanovic/Billie_Backend_Coding_Challenge.git
 
 Open project root folder and run next configurations:
 1. Open terminal and run: `docker-compose build`
-2. Then: `docker-compose -f docker-compose.yaml up`
-3. Enter the PHP container: `docker exec -it billie_backend_coding_challeng-php-1 /bin/bash`
+2. Then: `docker-compose -f docker-compose.yml up`
+3. Enter the PHP container: `docker exec -it billie_backend_coding_challenge-php-1 /bin/bash`
 4. In the container run `composer install` (after execute, it will take a little time to index the installed vendors)
-5. In the same container run: `php bin/console doctrine:migrations:execute --up 'DoctrineMigrations\Version20220515054739` to fill up the database
+5. In the same container run: `php bin/console doctrine:migrations:execute --up 'DoctrineMigrations\Version20220515054739'` to fill up the database
 6. Now, lets load some fixtures with `php bin/console doctrine:fixtures:load`
 
 Go to `http://localhost` page in your browser. If the installation is successful, you will see:
