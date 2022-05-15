@@ -32,12 +32,12 @@ class CompanyForm extends AbstractType
             ->add(
                 'address',
                 TextType::class,
-                array('label' => 'Address', 'required' => false, 'attr' => ['class' => 'form-control'])
+                array('label' => 'Address', 'required' => true, 'attr' => ['class' => 'form-control'])
             )
             ->add(
                 'phone',
                 TextType::class,
-                array('label' => 'Phone', 'required' => false, 'attr' => ['class' => 'form-control'])
+                array('label' => 'Phone', 'required' => true, 'attr' => ['class' => 'form-control'])
             )
             ->add('customerType', ChoiceType::class, [
                 'choices' => [

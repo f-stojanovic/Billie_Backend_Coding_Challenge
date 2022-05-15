@@ -63,7 +63,7 @@ class InvoiceService
         Company $debtorCompanyId,
         Company $creditorCompanyId,
         ?string $service,
-        string $quantity,
+        ?string $quantity,
         string $cost,
         string $statusType
     ): Invoice {
@@ -123,7 +123,7 @@ class InvoiceService
        $companyDebtLimit =  $this->companyRepository->findOneBy(['id' => $debtorCompanyId]);
        $limit = $companyDebtLimit->getDebtLimit();
 
-       if ($invoicesSum >= $limit) {
+       if ($invoicesSum > $limit) {
            return true;
        } else return false;
     }

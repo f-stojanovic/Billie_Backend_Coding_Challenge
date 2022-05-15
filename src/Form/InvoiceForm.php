@@ -50,12 +50,12 @@ class InvoiceForm extends AbstractType
             ->add(
                 'quantity',
                 TextType::class,
-                array('label' => 'Quantity', 'required' => false, 'attr' => ['class' => 'form-control'])
+                array('label' => 'Quantity', 'required' => true, 'attr' => ['class' => 'form-control'])
             )
             ->add(
                 'cost',
                 TextType::class,
-                array('label' => 'Cost', 'required' => false, 'attr' => ['class' => 'form-control'])
+                array('label' => 'Cost', 'required' => true, 'attr' => ['class' => 'form-control'])
             )
             ->add(
                 'currency',
