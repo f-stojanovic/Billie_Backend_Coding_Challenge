@@ -8,14 +8,14 @@ After the login you are redirected to Billie dashboard.
 
 I have implemented AdminLte2 free theme, just so it can look lit. :D
 
-I have added some basic feature there like, number to companies and invoices
+I have added some basic feature there like, number of companies and invoices
 we currently have inside the application and last 10 invoices that had been added.
 
 On the left sidebar we have a menu which has links to give us access to the list
 of companies and invoices, both of which have their separate views.
 
 I have implemented complete CRUD operations for them, pagination and some other
-features you will se once you enter the pages.
+features you will see once you enter the pages.
 
 On the edit page we can set debt limit for every debtor company on the list.
 
@@ -29,7 +29,7 @@ they are defined as 'paid'. While adding them, if invoice we are adding is
 exceeding the debt limit of the company, the persisting will be aborted.
 
 This is brief explanation of the system I designed. You can surly try it
-yourself and get familiar with all it's functionalities.
+yourself and get familiar with all it's functionalities. :)
 
 If I had more time, my next ideas will be to improve security (implement CSRF
 protection), managing roles for users, etc.
