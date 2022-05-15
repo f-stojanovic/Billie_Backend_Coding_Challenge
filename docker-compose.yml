@@ -13,20 +13,22 @@ services:
       context: ./docker-configs/php
     volumes:
       - "./docker-configs/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - "./docker-configs/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
       - ".:/app:cached"
     environment:
       PHP_IDE_CONFIG: "serverName=Docker"
 
-  postgresql:
-    image: postgres:11.5
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
     environment:
-      POSTGRES_DB: ${APP_DATABASE}
-      POSTGRES_PASSWORD: ${APP_DATABASE_PASSWORD}
-    volumes:
-      - "postgresdata:/var/lib/postgresql/11.5/main"
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: billie_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     ports:
-      - "127.0.0.1:${APP_DATABASE_PORT}:5432"
+      - 3306:3306
+    volumes:
+      - ./mysql-data:/var/lib/mysql
 
   mailcatcher:
     image: schickling/mailcatcher

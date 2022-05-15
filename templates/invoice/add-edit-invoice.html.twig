@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        {% if invoice.companyId.companyName is defined %}
+                            <h3 class="box-title">Edit invoice for {{ invoice.companyId.debtorCompanyName }}</h3>
+                        {% else %}
+                            <h3 class="box-title">Add new invoice</h3>
+                        {% endif %}
+                    </div>
+
+                    <div class="box-body">
+                        {{ form_start(form, {'attr': {'role': 'form', 'id':'invoiceForm'} } ) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.debtorCompanyId) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.creditorCompanyId) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_row(form.service) }}
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_row(form.quantity) }}
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_row(form.cost) }}
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="invoice_form_currency">Currency</label>
+                                    {{ form_widget(form.currency, {attr: { value : "EUR" } }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form_row(form.statusType) }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

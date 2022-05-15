@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div id="aircraft" class="box">
+                <div class="box-header">
+                    <h3 class="box-title">{{ contentTitle }}<br>Total items: [{{ totalItems }}]</h3>
+                    <a type="button" href="{{ path('add_invoice') }}" class="btn btn-primary btn-sm" style="float: right">Add</a>
+                </div>
+                {% for message in app.flashes('success') %}
+                    <div id="flash" class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('danger') %}
+                    <div id="flash" class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-condensed">
+                        <tbody>
+                        <tr class="text-centar">
+                            <th class="text-center">#</th>
+                            <th class="text-center">Invoice No</th>
+                            <th class="text-center">Debtor Company Name</th>
+                            <th class="text-center">Creditor Company Name</th>
+                            <th class="text-center">Service</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Cost</th>
+                            <th class="text-center">Status Type</th>
+                            <th class="text-center">Created</th>
+                            <th class="text-center">Updated</th>
+                            <th class="text-center">Commands</th>
+                        </tr>
+                        {% for invoice in invoiceList %}
+                            <tr>
+                                {% if invoice.statusType == 'open' %}
+                                    {% set marker = 'success' %}
+                                {% else %}
+                                    {% set marker = 'danger' %}
+                                {% endif %}
+                                <td class="text-center"> {{ invoice.id }} </td>
+                                <td class="text-center"> {{ invoice.invoiceNo }} </td>
+                                <td class="text-center"> {{ invoice.debtorCompanyId.companyName }}</td>
+                                <td class="text-center"> {{ invoice.creditorCompanyId.companyName }}</td>
+                                <td class="text-center"> {{ invoice.service }} </td>
+                                <td class="text-center"> {{ invoice.quantity }} </td>
+                                <td class="text-center"> {{ invoice.cost }} </td>
+                                <td class="text-center"> <span class="label label-{{ marker }}"> {{ invoice.statusType }}</span></td>
+                                <td class="text-center"> {{ invoice.createdAt|date("m/d/Y") }} </td>
+                                <td class="text-center"> {{ invoice.updatedAt|date("m/d/Y") }} </td>
+                                <td class="text-center">
+                                  {% if invoice.statusType == 'open' %}
+                                    <a type="button" href="{{ path('edit_invoice', {'id':invoice.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a type="button" href="{{ path('invoice_download', {'id':invoice.id}) }}" class="btn btn-primary btn-sm">Download PDF</a>
+                                  {% endif %}
+                                    <a type="button" href="{{ path('delete_invoice', {'id':invoice.id}) }}" onclick="return confirm('Are you sure?')" class="btn btn-primary btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            <li><a href="{{ app.request.pathinfo }}?page={{ currentPage - 1 }}">«</a></li>
+                            {% for i in 1..totalPages %}
+                                <li><a href="{{ app.request.pathinfo }}?page={{ i }}" {% if i == currentPage %} style="font-weight: bold" {% endif %}>{{ i }}</a></li>
+                            {% endfor %}
+                            <li><a href="{{ app.request.pathinfo }}?page={{ currentPage + 1 }}">»</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-right">
+                    <a href="{{ path('dashboard') }}" class="btn btn-primary btn-md">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

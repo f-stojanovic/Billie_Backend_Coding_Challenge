@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div id="aircraft" class="box">
+                <div class="box-header">
+                    <h3 class="box-title">{{ contentTitle }}<br>Total items: [{{ totalItems }}]</h3>
+                    <a type="button" href="{{ path('add_company') }}" class="btn btn-primary btn-sm" style="float: right">Add</a>
+                </div>
+                {% for message in app.flashes('success') %}
+                    <div id="flash" class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-condensed">
+                        <tbody>
+                        <tr class="text-centar">
+                            <th class="text-center">#</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Address</th>
+                            <th class="text-center">Phone</th>
+                            <th class="text-center">Customer Type</th>
+                            <th class="text-center">Debt limit</th>
+                            <th class="text-center">Created</th>
+                            <th class="text-center">Updated</th>
+                            <th class="text-center">Commands</th>
+                        </tr>
+                        {% for company in companyList %}
+                            <tr>
+                                {% if company.customerType == 'buyer' %}
+                                    {% set marker = 'warning' %}
+                                {% else %}
+                                    {% set marker = 'info' %}
+                                {% endif %}
+                                <td class="text-center"> {{ company.id }} </td>
+                                <td class="text-center"> {{ company.companyName }} </td>
+                                <td class="text-center"> {{ company.email }} </td>
+                                <td class="text-center"> {{ company.address }} </td>
+                                <td class="text-center"> {{ company.phone }} </td>
+                                <td class="text-center"> <span class="label label-{{ marker }}"> {{ company.customerType }}</span></td>
+                                <td class="text-center"> {{ company.debtLimit }} </td>
+                                <td class="text-center"> {{ company.createdAt|date("m/d/Y") }} </td>
+                                <td class="text-center"> {{ company.updatedAt|date("m/d/Y") }} </td>
+                                <td class="text-center">
+                                    <a type="button" href="{{ path('edit_company', {'id':company.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a type="button" href="{{ path('delete_company', {'id':company.id}) }}" onclick="return confirm('Are you sure?')" class="btn btn-primary btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            <li><a href="{{ app.request.pathinfo }}?page={{ currentPage - 1 }}">«</a></li>
+                            {% for i in 1..totalPages %}
+                                <li><a href="{{ app.request.pathinfo }}?page={{ i }}" {% if i == currentPage %} style="font-weight: bold" {% endif %}>{{ i }}</a></li>
+                            {% endfor %}
+                            <li><a href="{{ app.request.pathinfo }}?page={{ currentPage + 1 }}">»</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-right">
+                    <a href="{{ path('dashboard') }}" class="btn btn-primary btn-md">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
